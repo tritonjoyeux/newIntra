@@ -1,0 +1,20 @@
+{% extends 'IntraBundle::layout.html.twig' %}
+
+{% block content %}
+    <h1>{{ title }}</h1>
+    {% if app.session.flashBag.has('success') %}
+        {% for msg in app.session.flashBag.get('success') %}
+            {{ msg }}
+        {% endfor %}
+    {% endif %}
+    {% if users is not empty %}
+        <ul>
+            {% for user in users %}
+                <li><i>username : </i>{{ user.username }} <a href="{{ path('intra_admin_addstudents', { "id" : id, 'uid' : user.id }) }}">Ajouter</a></li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <i>No users</i>
+    {% endif %}
+    <br>
+{% endblock %}

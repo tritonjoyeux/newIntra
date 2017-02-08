@@ -1,0 +1,23 @@
+{% extends 'IntraBundle::layout.html.twig' %}
+
+{% block content %}
+    <h1>{{ title }}</h1>
+    {% if app.session.flashBag.has('success') %}
+        {% for msg in app.session.flashBag.get('success') %}
+            {{ msg }}
+        {% endfor %}
+    {% endif %}
+    {% if matieres is not empty %}
+        <ul>
+            {% for matiere in matieres %}
+                <li>{{ matiere.name }}
+                    <a href="{{ path('intra_admin_deletematiere', { 'id': matiere.id }) }}">delete</a>
+                    <a href="{{ path('intra_admin_updatematiere', { 'id': matiere.id }) }}">edit</a> </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <i>No matieres</i>
+    {% endif %}
+    <br>
+    <a href="{{ path('intra_admin_creatematiere') }}">Create</a>
+{% endblock %}

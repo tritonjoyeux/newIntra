@@ -1,0 +1,17 @@
+{% extends 'IntraBundle::layout.html.twig' %}
+
+{% block content %}
+    <h1>{{ title }}</h1>
+    {% if app.session.flashBag.has('success') %}
+        {% for msg in app.session.flashBag.get('success') %}
+            {{ msg }}
+        {% endfor %}
+    {% endif %}
+    {% if user is not empty %}
+        Username : {{ user.username }}<br>
+        Role : {% for role in user.roles %} {{ role }} {% endfor %}<br>
+    {% else %}
+        <i>No users</i>
+    {% endif %}
+    <br>
+{% endblock %}

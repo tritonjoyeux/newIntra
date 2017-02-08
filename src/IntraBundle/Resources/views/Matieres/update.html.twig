@@ -1,0 +1,32 @@
+{% extends 'IntraBundle::layout.html.twig' %}
+
+{% block content %}
+    <h1>{{ title }}</h1>
+    <a href="{{ path('intra_admin_changeteacher', { "id" : matiere.id }) }}">Changer le professeur</a><br>
+    <a href="{{ path('intra_admin_addstudents', { "id" : matiere.id }) }}">Ajouter des eleves</a><br>
+    {% if app.session.flashBag.has('success') %}
+        {% for msg in app.session.flashBag.get('success') %}
+            {{ msg }}
+        {% endfor %}
+    {% endif %}
+    {% if app.session.flashBag.has('error') %}
+        {% for msg in app.session.flashBag.get('error') %}
+            {{ msg }}
+        {% endfor %}
+    {% endif %}
+    {% if matiere is not empty %}
+        {% if matiere.users is not empty %}
+            {% for user in matiere.users %}
+                <br>
+                {% if user.roles[0] == 'ROLE_USER' %}
+                    Eleve :
+                {% else %}
+                    Prof :
+                {% endif %}
+                {{ user }} <a href="{{ path('intra_admin_removeusermatiere', {'id': matiere.id, 'uid' : user.id }) }}">delete</a>
+            {% endfor %}
+        {% else %}
+            <br>Aucuns utilisateurs dans cette matiere
+        {% endif %}
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'IntraBundle::layout.html.twig' %}
+
+{% block content %}
+    <h1>{{ title }}</h1>
+    {% if matieres is not empty %}
+        <table border="1">
+        {% for matiere in matieres %}
+            <tr><td>{{ matiere.name }}</td></tr>
+        {% endfor %}
+        </table>
+    {% else %}
+        <i>No matieres</i>
+    {% endif %}
+{% endblock %}

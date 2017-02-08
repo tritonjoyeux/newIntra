@@ -1,0 +1,24 @@
+{% extends 'IntraBundle::layout.html.twig' %}
+
+{% block content %}
+    <h1>{{ title }}</h1>
+    {% if app.session.flashBag.has('success') %}
+        {% for msg in app.session.flashBag.get('success') %}
+            {{ msg }}
+        {% endfor %}
+    {% endif %}
+    {% if app.session.flashBag.has('error') %}
+        {% for msg in app.session.flashBag.get('error') %}
+            {{ msg }}
+        {% endfor %}
+    {% endif %}
+    {% if users is not empty %}
+        <form method="post">
+            {% for user in users %}
+                <input type="radio" name="prof" value="{{ user }}">{{ user }}<br>
+            {% endfor %}
+            <input type="submit">
+        </form>
+    {% endif %}
+    <br><a href="">Retour</a>
+{% endblock %}

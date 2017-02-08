@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Intra sa mere</title>
+</head>
+<body>
+{% if is_granted('ROLE_USER') == true and is_granted('ROLE_ADMIN') == false and is_granted('ROLE_SUPER_ADMIN') == false %}
+    <h1>ELEVE</h1><br>
+    <a href="{{ path('intra_matieres_allmatieres') }}">Toutes les matieres</a>
+    <a href="{{ path('intra_matieres_mymatieres') }}">Vos matieres</a>
+    <a href="{{ path('intra_matieres_inscriptionmatieres') }}">S'inscrire a une matiere</a>
+{% elseif is_granted('ROLE_USER') == true and is_granted('ROLE_ADMIN') == true and is_granted('ROLE_SUPER_ADMIN') == false %}
+    <h1>PROF</h1><br>
+{% elseif is_granted('ROLE_USER') == true and is_granted('ROLE_ADMIN') == false and is_granted('ROLE_SUPER_ADMIN') == true %}
+    <h1>ADMIN</h1><br>
+    <a href="{{ path('intra_admin_adminhome') }}">Toutes les matieres</a>
+    <a href="{{ path('intra_admin_changeroles') }}">Utilisateurs</a>
+{% endif %}
+<a href="{{ path('fos_user_security_logout') }}">Deconnexion</a>
+{% block content %}
+{% endblock content %}
+{% block stylesheets %}
+{% endblock stylesheets %}
+{% block scripts %}
+{% endblock scripts %}
+</body>
+</html>

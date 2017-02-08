@@ -1,0 +1,21 @@
+{% extends 'IntraBundle::layout.html.twig' %}
+
+{% block content %}
+    <h1>{{ title }}</h1>
+    {% if app.session.flashBag.has('success') %}
+        {% for msg in app.session.flashBag.get('success') %}
+            {{ msg }}
+        {% endfor %}
+    {% endif %}
+    {% if matieres is not empty %}
+        <form action="{{ path('intra_matieres_inscriptionmatieres') }}" method="post">
+            {% for matiere in matieres %}
+                <input type="checkbox" value="{{ matiere.name }}" name="matieres[{{ matiere.name }}]"> {{ matiere.name }}
+                <br>
+            {% endfor %}
+            <input type="submit">
+        </form>
+    {% else %}
+        <i>No matieres</i>
+    {% endif %}
+{% endblock %}
